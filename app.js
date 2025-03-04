@@ -39,5 +39,5 @@ const run = (it, index) => {
     }
 };
 
-run('fuzzy', new FuzzyIndex());
+// run('fuzzy', new FuzzyIndex());
 run('lunr', new LunrIndex());
