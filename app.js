@@ -1,7 +1,6 @@
 import FuzzySearch from 'fuzzy-search';
-import lunr from 'lunr';
-import { data, test } from './data.js';
-import e from 'express';
+import Fuse from 'fuse.js';
+import { data, options, test } from './data.js';
 
 class Index {
     search(word) {
@@ -18,15 +17,11 @@ class FuzzyIndex extends Index {
     }
 }
 
-class LunrIndex extends Index {
+class FuseIndex extends Index {
     constructor() {
         super();
-        this.index = lunr(function () {
-            this.ref('id');
-            this.field('name');
-            for (const item of data) {
-                this.add(item);
-            }
+        this.index = new Fuse(data, {
+            keys: ['name'],
         });
     }
 }
@@ -39,5 +34,5 @@ const run = (it, index) => {
     }
 };
 
-// run('fuzzy', new FuzzyIndex());
-run('lunr', new LunrIndex());
+run('fuzzy', new FuzzyIndex());
+run('fuse', new FuseIndex());

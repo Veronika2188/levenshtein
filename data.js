@@ -13,6 +13,10 @@ export const data = [
     { id: '12', name: 'кондёр' },
 ];
 
+export const options = {
+    keys: ['id', 'name'],
+};
+
 export const test = [
     'свет',
     'газ',
